@@ -35,22 +35,23 @@ public class MarketController {
 	}
 
 	@GetMapping
-	public ResponseEntity<MarketComitentResponse> getMarket(@Valid @RequestParam Long code) throws MarketException {
-		return ResponseEntity.ok().body(marketInterface.getMarket(code));
+	public ResponseEntity<MarketComitentResponse> getMarket(@Valid @RequestParam String country)
+			throws MarketException {
+		return ResponseEntity.ok().body(marketInterface.getMarket(country.toLowerCase()));
 	}
 
 	@PutMapping
-	public ResponseEntity<?> updateMarket(@Valid @RequestParam Long code,
-			@Valid @RequestParam(name = "comitent_desc") String comitentDesc, @RequestBody MarketRequest request)
+	public ResponseEntity<?> updateMarket(@RequestParam String code, @RequestParam String country,
+			@RequestParam(name = "comitent_desc") String comitentDesc, @RequestBody MarketRequest request)
 			throws MarketException {
-		marketInterface.updateMarket(code, comitentDesc, request);
+		marketInterface.updateMarket(code, country.toLowerCase(), comitentDesc, request);
 		return ResponseEntity.ok().build();
 	}
 
 	@DeleteMapping
-	public ResponseEntity<?> deleteMarket(@Valid @RequestParam Long code,
-			@Valid @RequestParam(name = "comitent_desc") String comitentDesc) throws MarketException {
-		marketInterface.deleteMarket(code, comitentDesc);
+	public ResponseEntity<?> deleteMarket(@RequestParam String code, @RequestParam String country,
+			@RequestParam(name = "comitent_desc") String comitentDesc) throws MarketException {
+		marketInterface.deleteMarket(code, country.toLowerCase(), comitentDesc);
 		return ResponseEntity.ok().build();
 	}
 

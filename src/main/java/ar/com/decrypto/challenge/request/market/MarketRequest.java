@@ -2,7 +2,7 @@ package ar.com.decrypto.challenge.request.market;
 
 public class MarketRequest {
 
-	private Long code;
+	private String code;
 
 	private String description;
 
@@ -10,11 +10,11 @@ public class MarketRequest {
 	
 	private String comitentDescription;
 
-	public Long getCode() {
+	public String getCode() {
 		return code;
 	}
 
-	public void setCode(Long code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
@@ -27,7 +27,7 @@ public class MarketRequest {
 	}
 
 	public String getCountry() {
-		return country;
+		return country.toLowerCase();
 	}
 
 	public void setCountry(String country) {

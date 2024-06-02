@@ -17,28 +17,31 @@ public interface MarketInterface {
 	/**
 	 * Obtiene el mercado con los comitentes
 	 * 
-	 * @param code - codigo de mercado
+	 * @param country - pais
 	 * @return el mercado con los comitentes
 	 * @throws MarketException
 	 */
-	public MarketComitentResponse getMarket(Long code) throws MarketException;
+	public MarketComitentResponse getMarket(String country) throws MarketException;
 
 	/**
 	 * Actualiza el mercado
 	 * 
 	 * @param code                - codigo de mercado
+	 * @param country             - pais del mercado
 	 * @param comitentDescription - descripcion del comitente
 	 * @param request             - request del mercado
 	 * @throws MarketException
 	 */
-	public void updateMarket(Long code, String comitentDescription, MarketRequest request) throws MarketException;
+	public void updateMarket(String code, String country, String comitentDescription, MarketRequest request)
+			throws MarketException;
 
 	/**
 	 * Elimina el mercado
 	 * 
 	 * @param code                - codigo de mercado
+	 * @param country             - pais del mercado
 	 * @param comitentDescription - descripcion del comitente
 	 * @throws MarketException
 	 */
-	public void deleteMarket(Long code, String comitentDescription) throws MarketException;
+	public void deleteMarket(String code, String country, String comitentDescription) throws MarketException;
 }
