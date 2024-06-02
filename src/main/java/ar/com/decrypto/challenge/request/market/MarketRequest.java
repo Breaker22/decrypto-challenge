@@ -1,12 +1,14 @@
-package ar.com.decrypto.challenge.response.market;
+package ar.com.decrypto.challenge.request.market;
 
-public class MarketResponse {
+public class MarketRequest {
 
 	private Long code;
 
 	private String description;
 
 	private String country;
+	
+	private String comitentDescription;
 
 	public Long getCode() {
 		return code;
@@ -30,5 +32,13 @@ public class MarketResponse {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getComitentDescription() {
+		return comitentDescription;
+	}
+
+	public void setComitentDescription(String comitentDescription) {
+		this.comitentDescription = comitentDescription;
 	}
 }

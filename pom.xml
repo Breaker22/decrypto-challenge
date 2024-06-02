@@ -10,7 +10,7 @@
 	
 	<groupId>ar.com.decrypto</groupId>
 	<artifactId>decrypto-challenge</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>decrypto-challenge</name>
 	<description>Decrypto challenge</description>
 	
