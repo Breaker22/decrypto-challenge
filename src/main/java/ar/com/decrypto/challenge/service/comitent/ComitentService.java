@@ -25,9 +25,7 @@ public class ComitentService implements ComitentInterface {
 	public void createComitent(ComitentRequest request) throws ComitentException {
 		Comitent comitent = new Comitent();
 
-		if (comitentDao.findByDescription(request.getDescription()) != null) {
-			throw new ComitentException(HttpStatus.CONFLICT, "Ya existe este comitente!");
-		}
+		validationsCreateComitent(request);
 
 		comitent.setDescription(request.getDescription());
 
@@ -69,6 +67,8 @@ public class ComitentService implements ComitentInterface {
 		if (comitent == null) {
 			throw new ComitentException(HttpStatus.NOT_FOUND, "No existe este comitente!");
 		}
+		
+		validationsCreateComitent(request);
 
 		comitent.setDescription(request.getDescription());
 
@@ -84,5 +84,11 @@ public class ComitentService implements ComitentInterface {
 		}
 
 		comitentDao.delete(comitent);
+	}
+	
+	private void validationsCreateComitent(ComitentRequest request) throws ComitentException {
+		if (comitentDao.findByDescription(request.getDescription()) != null) {
+			throw new ComitentException(HttpStatus.CONFLICT, "Ya existe este comitente!");
+		}
 	}
 }
