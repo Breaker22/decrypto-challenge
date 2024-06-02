@@ -11,7 +11,7 @@ http://localhost:8080/swagger-ui.html#
 
 ## Url de Health Check
 ```
-http://localhost:8080/actuactor/health
+http://localhost:8080/actuator/health
 ```
 
 ## Ejecucion de proyecto

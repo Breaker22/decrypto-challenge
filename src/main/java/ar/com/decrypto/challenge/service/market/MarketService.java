@@ -31,7 +31,8 @@ public class MarketService implements MarketInterface {
 	public void createMarket(MarketRequest request) throws MarketException {
 		Market market = new Market();
 		Comitent comitent = comitentDao.findByDescription(request.getComitentDescription());
-		final List<Market> marketDuplicate = marketDao.findByCode(request.getCode());
+		final Market marketDuplicate = marketDao.findByCodeAndCountryAndComitent(request.getCode(),
+				request.getCountry(), request.getComitentDescription());
 
 		if (comitent == null) {
 			throw new MarketException(HttpStatus.NOT_FOUND, "No existe el comitente!");
@@ -39,10 +40,8 @@ public class MarketService implements MarketInterface {
 
 		validateCountry(request.getCountry());
 
-		if (!CollectionUtils.isEmpty(marketDuplicate) && marketDuplicate.stream()
-				.filter(m -> m.getComitent().getDescription().equalsIgnoreCase(request.getComitentDescription()))
-				.count() >= 1) {
-			throw new MarketException(HttpStatus.CONFLICT, "Ya existe este codigo de mercado para este comitente!");
+		if (marketDuplicate != null) {
+			throw new MarketException(HttpStatus.CONFLICT, "Ya existe este codigo con ese pais para este comitente!");
 		}
 
 		market.setCode(request.getCode());
@@ -55,19 +54,19 @@ public class MarketService implements MarketInterface {
 	}
 
 	@Override
-	public MarketComitentResponse getMarket(String code) throws MarketException {
-		List<Market> listMarket = marketDao.findByCode(code);
+	public MarketComitentResponse getMarket(String country) throws MarketException {
+		List<Market> listMarket = marketDao.findByCountry(country);
 
 		MarketComitentResponse response = new MarketComitentResponse();
 		ArrayList<ComitentRequest> listComitent = new ArrayList<>();
 
 		if (CollectionUtils.isEmpty(listMarket)) {
-			throw new MarketException(HttpStatus.NOT_FOUND, "No existe ningun mercado con ese codigo!");
+			throw new MarketException(HttpStatus.NOT_FOUND, "No existe ningun mercado con ese pais!");
 		}
 
 		for (Market market : listMarket) {
-			response.setCode(code);
-			response.setCountry(market.getCountry());
+			response.setCode(market.getCode());
+			response.setCountry(country);
 			response.setDescription(market.getDescription());
 
 			ComitentRequest comitentReq = new ComitentRequest();
@@ -83,8 +82,9 @@ public class MarketService implements MarketInterface {
 	}
 
 	@Override
-	public void updateMarket(String code, String comitentDescription, MarketRequest request) throws MarketException {
-		Market market = marketDao.findByCodeAndComitent(code, comitentDescription);
+	public void updateMarket(String code, String country, String comitentDescription, MarketRequest request)
+			throws MarketException {
+		Market market = marketDao.findByCodeAndCountryAndComitent(code, country, comitentDescription);
 		Comitent comitent = comitentDao.findByDescription(request.getComitentDescription());
 
 		if (market == null) {
@@ -102,8 +102,8 @@ public class MarketService implements MarketInterface {
 	}
 
 	@Override
-	public void deleteMarket(String code, String comitentDescription) throws MarketException {
-		Market market = marketDao.findByCodeAndComitent(code, comitentDescription);
+	public void deleteMarket(String code, String country, String comitentDescription) throws MarketException {
+		Market market = marketDao.findByCodeAndCountryAndComitent(code, country, comitentDescription);
 
 		if (market == null) {
 			throw new MarketException(HttpStatus.NOT_FOUND, "No existe el mercado!");

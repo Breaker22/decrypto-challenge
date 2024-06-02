@@ -27,7 +27,7 @@ public class MarketRequest {
 	}
 
 	public String getCountry() {
-		return country;
+		return country.toLowerCase();
 	}
 
 	public void setCountry(String country) {
