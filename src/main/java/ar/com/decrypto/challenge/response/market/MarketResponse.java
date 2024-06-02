@@ -2,17 +2,17 @@ package ar.com.decrypto.challenge.response.market;
 
 public class MarketResponse {
 
-	private Long code;
+	private String code;
 
 	private String description;
 
 	private String country;
 
-	public Long getCode() {
+	public String getCode() {
 		return code;
 	}
 
-	public void setCode(Long code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 

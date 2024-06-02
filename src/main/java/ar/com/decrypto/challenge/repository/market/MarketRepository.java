@@ -10,7 +10,7 @@ import ar.com.decrypto.challenge.entity.Market;
 @Repository
 public interface MarketRepository extends CrudRepository<Market, Long> {
 
-	public List<Market> findByCode(Long code);
+	public List<Market> findByCode(String code);
 
-	public Market findByCodeAndComitent_Description(Long code, String comitentDesc);
+	public Market findByCodeAndComitent_Description(String code, String comitentDesc);
 }

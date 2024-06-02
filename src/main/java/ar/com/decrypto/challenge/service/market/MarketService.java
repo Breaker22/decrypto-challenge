@@ -55,7 +55,7 @@ public class MarketService implements MarketInterface {
 	}
 
 	@Override
-	public MarketComitentResponse getMarket(Long code) throws MarketException {
+	public MarketComitentResponse getMarket(String code) throws MarketException {
 		List<Market> listMarket = marketDao.findByCode(code);
 
 		MarketComitentResponse response = new MarketComitentResponse();
@@ -83,7 +83,7 @@ public class MarketService implements MarketInterface {
 	}
 
 	@Override
-	public void updateMarket(Long code, String comitentDescription, MarketRequest request) throws MarketException {
+	public void updateMarket(String code, String comitentDescription, MarketRequest request) throws MarketException {
 		Market market = marketDao.findByCodeAndComitent(code, comitentDescription);
 		Comitent comitent = comitentDao.findByDescription(request.getComitentDescription());
 
@@ -102,7 +102,7 @@ public class MarketService implements MarketInterface {
 	}
 
 	@Override
-	public void deleteMarket(Long code, String comitentDescription) throws MarketException {
+	public void deleteMarket(String code, String comitentDescription) throws MarketException {
 		Market market = marketDao.findByCodeAndComitent(code, comitentDescription);
 
 		if (market == null) {

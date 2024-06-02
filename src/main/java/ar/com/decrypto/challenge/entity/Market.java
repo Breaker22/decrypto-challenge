@@ -18,7 +18,7 @@ public class Market implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	private Long code;
+	private String code;
 
 	private String description;
 
@@ -36,11 +36,11 @@ public class Market implements Serializable {
 		this.id = id;
 	}
 
-	public Long getCode() {
+	public String getCode() {
 		return code;
 	}
 
-	public void setCode(Long code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
